@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block title%}
+<title>Targets list</title>
+{% endblock %}
+
+{%block content%}
+<h1>Monthly Targets List</h1>
+<div>
+    <ul>
+        {% for month in months_list %}
+        <a href="{% url "month_target" month %}"><li>{{month}}</li></a>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
