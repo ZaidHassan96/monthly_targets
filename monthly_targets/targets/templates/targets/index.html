@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
 
+{%block css_files%}
+<link rel="stylesheet" href="{% static "targets/targets.css" %}">
+{% endblock %}
+
 {%block title%}
 <title>Targets list</title>
 {% endblock %}
 
 {%block content%}
+{% include "targets/includes/header.html"%}
 <h1>Monthly Targets List</h1>
 <div>
     <ul>
         {% for month in months_list %}
-        <a href="{% url "month_target" month %}"><li>{{month}}</li></a>
+        <li><a href="{% url "month_target" month %}">{{month}}</a></li>
         {% endfor %}
     </ul>
 </div>

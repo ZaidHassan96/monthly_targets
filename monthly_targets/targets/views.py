@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.urls import reverse
 
 
 monthly_targets = {
@@ -20,6 +21,18 @@ monthly_targets = {
 def targets_list(request):
     months = list(monthly_targets.keys())
     return render(request, "targets/index.html", {"months_list": months})
+
+def targets_by_num(request, month): 
+    months = list(monthly_targets.keys())
+    if month > len(months):
+        return HttpResponseNotFound("Does not exist")
+
+    redirect_month = months[month - 1]
+    redirect_url = reverse("month_target", args=[redirect_month])
+    return HttpResponseRedirect(redirect_url)
+
+
+
 
 
 def targets(request,month): 
